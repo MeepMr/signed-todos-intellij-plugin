@@ -33,4 +33,11 @@
         <listener class="de.justinklein.signedtodos.FileSystemListener"
                   topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
     </applicationListeners>
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable parentId="tools"
+                                 instance="de.justinklein.signedtodos.settings.PluginSettingsConfigurable"
+                                 id="de.justinklein.signedtodos.settings.PluginSettingsConfigurable"
+                                 displayName="Signed TODOs"/>
+        <applicationService serviceImplementation="de.justinklein.signedtodos.settings.PluginSettingsState"/>
+    </extensions>
 </idea-plugin>
