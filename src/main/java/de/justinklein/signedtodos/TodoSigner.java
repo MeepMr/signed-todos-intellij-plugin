@@ -13,9 +13,9 @@ public class TodoSigner {
         var outputStream = file.getOutputStream(null);
         bufferedReader.lines().forEach(line -> {
           try {
-            if (lineContainsTodos(line)) {
+            if (lineContainsTodos(line) && !lineEndsWithSignature(line)) {
               System.out.println("Test");
-              var test = line + " Test";
+              var test = line + " (jklein 20.12.2023)";
               outputStream.write(test.getBytes());
             } else {
               outputStream.write(line.getBytes());
@@ -40,5 +40,9 @@ public class TodoSigner {
     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
       return bufferedReader.lines().anyMatch(TodoSigner::lineContainsTodos);
     }
+  }
+
+  private static boolean lineEndsWithSignature(String line) {
+    return line.matches("(.*[(])(.+[ ][0-9]{1,2}[.][0-9]{1,2}[.][0-9]{2,4}[)].*)");
   }
 }
