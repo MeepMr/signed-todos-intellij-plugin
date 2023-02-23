@@ -1,6 +1,7 @@
 package de.justinklein.signedtodos;
 
 import com.intellij.openapi.vfs.VirtualFile;
+import de.justinklein.signedtodos.settings.PluginSettingsState;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,9 +15,8 @@ public class TodoSigner {
         bufferedReader.lines().forEach(line -> {
           try {
             if (lineContainsTodos(line) && !lineEndsWithSignature(line)) {
-              System.out.println("Test");
-              var test = line + " (jklein 20.12.2023)";
-              outputStream.write(test.getBytes());
+              String signedLine = line + getSignature();
+              outputStream.write(signedLine.getBytes());
             } else {
               outputStream.write(line.getBytes());
             }
@@ -44,5 +44,17 @@ public class TodoSigner {
 
   private static boolean lineEndsWithSignature(String line) {
     return line.matches("(.*[(])(.+[ ][0-9]{1,2}[.][0-9]{1,2}[.][0-9]{2,4}[)].*)");
+  }
+
+  private static String getName() {
+    return PluginSettingsState.getInstance().userId;
+  }
+
+  private static String getDateString() {
+    return "20.12.2023";
+  }
+
+  private static String getSignature() {
+    return "(" + getName() + " " + getDateString() + ")";
   }
 }
