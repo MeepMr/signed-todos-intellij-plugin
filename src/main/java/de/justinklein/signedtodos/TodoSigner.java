@@ -15,7 +15,7 @@ public class TodoSigner {
         bufferedReader.lines().forEach(line -> {
           try {
             if (lineContainsTodos(line) && !lineEndsWithSignature(line)) {
-              String signedLine = line + getSignature();
+              String signedLine = line + " " + getSignature();
               outputStream.write(signedLine.getBytes());
             } else {
               outputStream.write(line.getBytes());
