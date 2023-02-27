@@ -33,8 +33,8 @@ tasks {
     }
 
     signPlugin {
-        certificateChain.set("""${System.getenv("CERTIFICATE_CHAIN")}""".stripIndent())
-        certificateChain.set("""${System.getenv("PRIVATE_KEY")}""".stripIndent())
+        certificateChain.set("""${System.getenv("CERTIFICATE_CHAIN")}""")
+        certificateChain.set("""${System.getenv("PRIVATE_KEY")}""")
         password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
     }
 
