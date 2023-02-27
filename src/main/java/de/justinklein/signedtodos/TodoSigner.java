@@ -6,6 +6,8 @@ import de.justinklein.signedtodos.settings.PluginSettingsState;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TodoSigner {
   static void signTodosInFile(VirtualFile file) {
@@ -50,11 +52,14 @@ public class TodoSigner {
     return PluginSettingsState.getInstance().userId;
   }
 
-  private static String getDateString() {
-    return "20.12.2023";
-  }
-
   private static String getSignature() {
     return "(" + getName() + " " + getDateString() + ")";
   }
+
+  private static String getDateString() {
+    var dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    var today = LocalDateTime.now();
+    return dateFormatter.format(today);
+  }
+
 }
