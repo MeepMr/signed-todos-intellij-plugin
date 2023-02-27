@@ -31,5 +31,5 @@ jobs:
           PRIVATE_KEY_PASSWORD: op://Hosting-Secrets/JetBrains-Marketplace-Signing-Certificate/add more/Certificate-Password
           PUBLISH_TOKEN: op://Hosting-Secrets/signed-todos-marketplace-token/credential
       - name: Sign and release Plugin
-        runs: ./gradlew signPlugin
+        run: ./gradlew signPlugin
 #  create-github-release:
